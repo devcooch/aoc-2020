@@ -27,7 +27,7 @@ fn validate_pass(pass: &HashMap<&str, &str>) -> bool {
                     let hgt = value.get(..i.unwrap()).unwrap().parse::<u32>().unwrap();
                     let units = value.get(i.unwrap()..).unwrap();
                     match units {
-                        "cm" => valid &= (hgt >=150) && (hgt <= 193),
+                        "cm" => valid &= (hgt >= 150) && (hgt <= 193),
                         "in" => valid &= (hgt >= 59) && (hgt <= 76),
                         _ => valid = false,
                     }
