@@ -18,7 +18,7 @@ fn main() {
             total += cross.len();
             cross = get_all();
         } else {
-            let answers : HashSet<_> = line.chars().collect();
+            let answers: HashSet<_> = line.chars().collect();
             cross = cross.intersection(&answers).cloned().collect();
         }
     }
