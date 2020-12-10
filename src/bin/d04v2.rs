@@ -23,9 +23,9 @@ fn validate_pass(pass: &HashMap<&str, &str>) -> bool {
             }
             "hgt" => {
                 let i = value.find(char::is_alphabetic);
-                if i.is_some() {
-                    let hgt = value.get(..i.unwrap()).unwrap().parse::<u32>().unwrap();
-                    let units = value.get(i.unwrap()..).unwrap();
+                if let Some(pos) = i {
+                    let hgt = value.get(..pos).unwrap().parse::<u32>().unwrap();
+                    let units = value.get(pos..).unwrap();
                     match units {
                         "cm" => valid &= (hgt >= 150) && (hgt <= 193),
                         "in" => valid &= (hgt >= 59) && (hgt <= 76),
@@ -37,7 +37,7 @@ fn validate_pass(pass: &HashMap<&str, &str>) -> bool {
                 must += 1;
             }
             "hcl" => {
-                valid &= value.chars().next().unwrap() == '#'
+                valid &= value.starts_with('#')
                     && value
                         .chars()
                         .any(|c| (c >= '0' && c <= '9') || (c >= 'a' && c <= 'f'));

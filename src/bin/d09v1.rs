@@ -6,7 +6,7 @@ fn can_be_sum_of_two(n: &usize, v: &[usize]) -> bool {
             }
         }
     }
-    return false;
+    false
 }
 
 fn main() {

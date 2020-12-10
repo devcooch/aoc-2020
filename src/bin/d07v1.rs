@@ -14,10 +14,10 @@ impl Rules {
         }
         self.colors[bag_color]
     }
-    fn add_rule(&mut self, bag: &str, contents: &str) -> () {
+    fn add_rule(&mut self, bag: &str, contents: &str) {
         let bag_color = self.add_color(bag);
         for inside in contents.split(", ") {
-            let words: Vec<_> = inside.split(" ").collect();
+            let words: Vec<_> = inside.split(' ').collect();
             assert!(words.len() == 4 || (words.len() == 3 && words[0] == "no"));
             if words.len() == 4 {
                 assert!(words[3] == "bag" || words[3] == "bags");
@@ -57,7 +57,7 @@ fn main() {
         let mut iter = line.trim().split(" bags contain ");
         let from = iter.next().unwrap();
         let contents = iter.next().unwrap().trim().trim_matches('.');
-        assert!(contents.len() > 0);
+        assert!(!contents.is_empty());
         rules.add_rule(from, contents);
     }
     let shiny_gold = rules.add_color("shiny gold");

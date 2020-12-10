@@ -9,7 +9,7 @@ struct Instruction {
     val: i64,
 }
 
-fn execute(dp: &Vec<Instruction>) -> i64 {
+fn execute(dp: &[Instruction]) -> i64 {
     let mut acc = 0i64;
     let mut ip = 0usize;
     let mut visited = vec![false; dp.len()];
@@ -31,7 +31,7 @@ fn main() {
     let src = include_str!("day08.txt");
     let mut dp = Vec::new();
     for line in src.lines() {
-        let mut iter = line.split(" ");
+        let mut iter = line.split(' ');
         let ops = iter.next().unwrap();
         let val = iter.next().unwrap().parse::<i64>().unwrap();
         let opc = match ops {
