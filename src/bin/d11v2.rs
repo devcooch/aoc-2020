@@ -34,7 +34,12 @@ fn main() {
                     let mut nx = col as i64;
                     ny += dy;
                     nx += dx;
-                    while (ny > 0) && (ny <= h as i64) && (nx > 0) && (nx <= w as i64) && layout[ny as usize][nx as usize] == '.' {
+                    while (ny > 0)
+                        && (ny <= h as i64)
+                        && (nx > 0)
+                        && (nx <= w as i64)
+                        && layout[ny as usize][nx as usize] == '.'
+                    {
                         ny += dy;
                         nx += dx;
                     }
