@@ -2,18 +2,10 @@ fn options_in_range(r: &[usize]) -> usize {
     match r.len() {
         0 | 1 | 2 => 1,
         3 => 2,
-        4 => 4,
-        5 => 6,
+        4 => 4, /* 0, 1, 2, 3 | 0, 3 | 0, 1, 3 | 0, 2, 3 */
+        5 => 7, /* 0, 1, 2, 3, 4 | 0, 2, 3, 4 | 0, 3, 4 | 0, 1, 2, 4 | 0, 1, 4 | 0, 2, 4 | 0, 1, 3, 4 */
         _ => panic!("WUT!"),
     }
-    /*
-    if r.len() < 3 {
-        return 1;
-    }
-    let d = r.iter().zip(r.iter().skip(1)).map(|(l, r)| r - l).inspect(|x| print!("{} ", x)).collect::<Vec<usize>>();
-    println!();
-    d.len()
-    */
 }
 
 fn main() {
@@ -21,6 +13,7 @@ fn main() {
         .lines()
         .map(|x| x.parse::<usize>().unwrap())
         .collect();
+    data.push(0);
     data.sort_unstable();
     let mut result = 1;
     let mut prev = 0;
@@ -33,5 +26,7 @@ fn main() {
         }
         prev = *x;
     }
+    let range = start..;
+    result *= options_in_range(&data[range]);
     println!("{}", result);
 }
