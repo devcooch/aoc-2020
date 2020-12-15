@@ -10,9 +10,11 @@ fn main() {
         .filter(|(_, x)| x != &"x")
         .map(|(i, x)| (i as u64, x.parse::<u64>().unwrap()))
         .collect();
-    let ratio = buses[0].1;
+    let fastest = buses.iter().max_by_key(|(_, x)| x).unwrap();
+    let ratio = fastest.1;
+    let offset = fastest.0;
     let mut ts = 100000000000000;
-    while ts % ratio != 0 {
+    while (ts + offset)% ratio != 0 {
         ts += 1;
     }
     // 67a = x + 0
@@ -21,7 +23,7 @@ fn main() {
     // 61d = x + 3
     'main: loop {
         //println!("Trying {}", ts);
-        for (bus_offset, bus_ratio) in &buses[1..] {
+        for (bus_offset, bus_ratio) in &buses {
             //print!("Bus {} should have offset {} minutes..", bus_ratio, bus_offset);
             if (ts + bus_offset) % bus_ratio != 0 {
                 //println!("failed!");
