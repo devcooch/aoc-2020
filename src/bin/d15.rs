@@ -5,7 +5,7 @@ fn main() {
     let targets = [2020usize, 30000000];
     for target in targets.iter() {
         let mut seen: HashMap<usize, (usize, usize)> = HashMap::new();
-        let mut stream = start.iter().cloned().collect::<Vec<_>>();
+        let mut stream = start.to_vec();
         for (i, x) in start.iter().enumerate() {
             seen.insert(*x, (i, i));
         }
@@ -25,6 +25,10 @@ fn main() {
                 stream.push(0);
             }
         }
-        println!("For target {} the value is {}", target, stream.last().unwrap());
+        println!(
+            "For target {} the value is {}",
+            target,
+            stream.last().unwrap()
+        );
     }
 }
