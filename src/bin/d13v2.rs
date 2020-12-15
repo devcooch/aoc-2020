@@ -14,7 +14,7 @@ fn main() {
     let ratio = fastest.1;
     let offset = fastest.0;
     let mut ts = 100000000000000;
-    while (ts + offset)% ratio != 0 {
+    while (ts + offset) % ratio != 0 {
         ts += 1;
     }
     // 67a = x + 0

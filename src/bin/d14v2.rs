@@ -3,8 +3,8 @@ use std::collections::HashMap;
 fn main() {
     let data = include_str!("day14.txt");
     let mut mem: HashMap<u64, u64> = HashMap::new();
-    let mut and_masks : Vec<u64> = Vec::new();
-    let mut or_masks : Vec<u64> = Vec::new();
+    let mut and_masks: Vec<u64> = Vec::new();
+    let mut or_masks: Vec<u64> = Vec::new();
     for line in data.lines() {
         let mut iter = line.split(" = ");
         if line.starts_with("mask") {
