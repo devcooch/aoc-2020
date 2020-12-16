@@ -1,15 +1,20 @@
 use std::collections::{HashMap, HashSet};
 
+#[derive(Clone, Copy, PartialEq, Eq, Hash, Debug)]
+struct ColorId(usize);
+
 struct Rules {
-    colors: HashMap<String, usize>,
-    rules: HashMap<usize, Vec<(usize, usize)>>,
+    colors: HashMap<String, ColorId>,
+    names: HashMap<ColorId, String>,
+    rules: HashMap<ColorId, Vec<(usize, ColorId)>>,
 }
 
 impl Rules {
-    fn add_color(&mut self, bag_color: &str) -> usize {
+    fn add_color(&mut self, bag_color: &str) -> ColorId {
         if !self.colors.contains_key(bag_color) {
-            let new_color = self.colors.len();
+            let new_color = ColorId(self.colors.len());
             self.colors.insert(bag_color.to_string(), new_color);
+            self.names.insert(new_color, bag_color.to_string());
             self.rules.insert(new_color, Vec::new());
         }
         self.colors[bag_color]
@@ -35,11 +40,12 @@ impl Rules {
     fn new() -> Self {
         Rules {
             colors: HashMap::new(),
+            names: HashMap::new(),
             rules: HashMap::new(),
         }
     }
 
-    fn can_contain(&self, check_color: &usize) -> HashSet<usize> {
+    fn can_contain(&self, check_color: &ColorId) -> HashSet<ColorId> {
         let mut result = HashSet::new();
         for (color, content) in self.rules.iter() {
             if content.iter().any(|(_, inside)| inside == check_color) {
@@ -69,7 +75,7 @@ fn main() {
         let previous: HashSet<_> = current.iter().cloned().collect();
         current.clear();
         for color in previous {
-            print!("{},", color);
+            print!("{:?}|{},", color, rules.names[&color]);
             for x in rules.can_contain(&color) {
                 current.insert(x);
             }
