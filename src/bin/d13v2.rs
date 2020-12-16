@@ -1,6 +1,7 @@
 fn main() {
     let data = include_str!("day13.txt");
-    let buses: Vec<_> = data.lines()
+    let buses: Vec<_> = data
+        .lines()
         .nth(1)
         .unwrap()
         .split(',')
@@ -25,7 +26,10 @@ fn main() {
     'main: loop {
         println!("Trying {}", ts);
         for (bus_offset, bus_ratio) in &buses {
-            print!("Bus {} should have offset {} minutes..", bus_ratio, bus_offset);
+            print!(
+                "Bus {} should have offset {} minutes..",
+                bus_ratio, bus_offset
+            );
             if (ts + bus_offset) % bus_ratio != 0 {
                 println!("failed!");
                 ts += ratio;
