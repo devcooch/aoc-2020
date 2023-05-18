@@ -80,8 +80,8 @@ fn calculate(s: &str, i: usize) -> u64 {
             ),
         }
         if c != ' ' {
-//            println!("{}", c);
-//            print_stack(&stack);
+            //            println!("{}", c);
+            //            print_stack(&stack);
         }
     }
     stack.last().unwrap().0
@@ -93,7 +93,7 @@ fn main() {
     let total: u64 = data
         .lines()
         .enumerate()
-//        .filter(|(i, _)| i + 1 == debug)
+        //        .filter(|(i, _)| i + 1 == debug)
         .inspect(|(i, line)| print!("{}: {}", i + 1, line))
         .map(|(i, line)| calculate(line, i))
         .inspect(|v| println!(" = {}", v))
